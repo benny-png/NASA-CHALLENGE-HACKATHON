@@ -14,31 +14,10 @@ from google.oauth2 import service_account
 
 
 # Function to initialize Earth Engine with service account
-def initialize_ee():
-    try:
-        # Try to initialize with application default credentials
-        ee.Initialize(project='ee-mazikuben2')
-        print("Initialized with application default credentials.")
-    except ee.EEException:
-        # If that fails, try to use service account
-        try:
-            service_account_file = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-            if service_account_file and os.path.exists(service_account_file):
-                credentials = service_account.Credentials.from_service_account_file(
-                    service_account_file, 
-                    scopes=['https://www.googleapis.com/auth/earthengine']
-                )
-                ee.Initialize(credentials, project='ee-mazikuben2')
-                print(f"Initialized with service account: {service_account_file}")
-            else:
-                raise FileNotFoundError("Service account file not found.")
-        except (FileNotFoundError, DefaultCredentialsError) as e:
-            print(f"Failed to initialize Earth Engine: {str(e)}")
-            print("Please ensure you have set up your credentials correctly.")
-            raise
-
-# Call this function at the start of your application
-initialize_ee()
+import ee
+service_account = 'test-724@ee-mazikuben2.iam.gserviceaccount.com'
+credentials = ee.ServiceAccountCredentials(service_account, 'ee-mazikuben2-0574e00f5425.json')
+ee.Initialize(credentials, project='ee-mazikuben2')
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)

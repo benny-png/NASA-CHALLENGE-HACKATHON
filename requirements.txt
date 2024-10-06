@@ -9,3 +9,6 @@ geopandas
 python-multipart
 aiohttp
 python-dotenv
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
