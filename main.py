@@ -14,7 +14,7 @@ from google.oauth2 import service_account
 
 # Load environment vation.")riables from .env file
 service_account = 'test-724@ee-mazikuben2.iam.gserviceaccount.com'
-credentials = ee.ServiceAccountCredentials(service_account, 'ee-mazikuben2-6eb98f9c737f.json')
+credentials = ee.ServiceAccountCredentials(service_account, 'credentials.json')
 ee.Initialize(credentials)
 
     
