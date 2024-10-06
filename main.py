@@ -13,11 +13,14 @@ from google.oauth2 import service_account
 #ee.Initialize(project='ee-mazikuben2')
 
 
-# Function to initialize Earth Engine with service account
-import ee
-service_account = 'test-724@ee-mazikuben2.iam.gserviceaccount.com'
-credentials = ee.ServiceAccountCredentials(service_account, 'ee-mazikuben2-0574e00f5425.json')
-ee.Initialize(credentials, project='ee-mazikuben2')
+# Load credentials from the environment variable
+google_credentials = os.getenv('GOOGLE_CREDENTIALS')
+credentials_dict = json.loads(google_credentials)
+
+credentials = service_account.Credentials.from_service_account_info(credentials_dict)
+
+# Initialize Earth Engine with the credentials
+ee.Initialize(credentials)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
