@@ -8,3 +8,4 @@ pillow
 geopandas
 python-multipart
 aiohttp
+python-dotenv
