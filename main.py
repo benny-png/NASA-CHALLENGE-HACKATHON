@@ -12,30 +12,11 @@ from google.oauth2 import service_account
 # Initialize Earth Engine
 #ee.Initialize(project='ee-mazikuben2')
 
-# Load environment variables from .env file
-# Get Google credentials from the environment variable
-google_credentials = os.getenv("GOOGLE_CREDENTIALS")
+# Load environment vation.")riables from .env file
+service_account = 'test-724@ee-mazikuben2.iam.gserviceaccount.com'
+credentials = ee.ServiceAccountCredentials(service_account, 'ee-mazikuben2-0574e00f5425.json')
+ee.Initialize(credentials)
 
-# Debug output (be careful not to log this in production)
-print(f"Google credentials environment variable is {'set' if google_credentials else 'not set'}")
-
-# Check if google_credentials is valid
-if google_credentials:
-    try:
-        # Parse the JSON credentials
-        credentials_dict = json.loads(google_credentials)
-        print("Credentials parsed successfully.")
-        
-        # Initialize Earth Engine with the credentials
-        credentials = ee.ServiceAccountCredentials(email=credentials_dict['client_email'], key_data=credentials_dict['private_key'])
-        ee.Initialize(credentials)
-        print("Earth Engine initialized successfully.")
-    except json.JSONDecodeError as e:
-        print(f"Error parsing JSON: {e}")
-    except ee.EEException as e:
-        print(f"Error initializing Earth Engine: {e}")
-else:
-    print("Google credentials are not set. Please check your configuration.")
     
     
 
